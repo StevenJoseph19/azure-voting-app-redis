@@ -20,28 +20,40 @@ pipeline {
             //      """ )
          }
       }
-      // stage('Start App') {
-      //    steps {
-      //       sh(script: 'docker compose up -d')
-      //    }
-      // }
-   //    stage('Run Tests') {
-   //       steps {
-   //          echo "Running tests)"
-   //       }
-   //       post {
-   //          success {
-   //             echo "Tests passed! :)"
-   //          }
-   //          failure {
-   //             echo "Tests failed :("
-   //          }
-   //       }
-   //    }
-   // }
-   // post {
-   //    always {
-   //       sh(script: 'docker compose down')
-   //    }
-   // }
+      stage('Start App') {
+         steps {
+            sh(script: 'docker compose up -d')
+         }
+      }
+      stage('Run Tests') {
+         steps {
+            echo "Running tests)"
+         }
+         post {
+            success {
+               echo "Tests passed! :)"
+            }
+            failure {
+               echo "Tests failed :("
+            }
+         }
+      }
+      stage('Docker Push') {
+         steps {
+            echo "Running in $WORKSPACE"
+            dir("$WORKSPACE/azure-vote")
+            script:{
+                  docker.withRegistry('',dockerhub){
+                     def image = docker.build('stevesam/jenkins-course')
+                     image.push()
+                  }
+            }
+         }
+      }
+   }
+   post {
+      always {
+         sh(script: 'docker compose down')
+      }
+   }
 }
