@@ -38,7 +38,6 @@ pipeline {
             }
          }
       }
-<<<<<<< HEAD
       stage('Docker Push') {
          steps {
             echo "Running in $WORKSPACE"
@@ -51,8 +50,6 @@ pipeline {
             })
          }
       }
-=======
->>>>>>> d8dbc6dd2ca2862ddf65b0839ffc204f928e9914
    }
    post {
       always {
