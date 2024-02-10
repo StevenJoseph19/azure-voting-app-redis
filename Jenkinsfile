@@ -42,12 +42,13 @@ pipeline {
          steps {
             echo "Running in $WORKSPACE"
             dir("$WORKSPACE/azure-vote"){
-            sh(script:{
+            script{
                   docker.withRegistry('',dockerhub){
                      def image = docker.build('stevesam/jenkins-course')
                      image.push()
                   }
-            })}
+            }
+          }
          }
       }
    }
