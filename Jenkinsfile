@@ -49,13 +49,7 @@ pipeline {
                        }
 
                   }
-                  //  stage ('Push Image to DockerHub') {
-
-                  //            steps {
-                  //                sh 'docker push stevesam/psta-search_microservice:'
-                                
-                  //            }
-                  //   }
+                
       stage('Docker Push') {
          steps {
             echo "Running in $WORKSPACE"
