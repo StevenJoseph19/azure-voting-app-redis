@@ -1,6 +1,10 @@
 pipeline {
    agent any
 
+   environment{
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+  }
+
    stages {
       stage('Verify Branch') {
          steps {
@@ -38,16 +42,29 @@ pipeline {
             }
          }
       }
+       stage ('Login to DockerHub') {
+
+                       steps {
+                           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                       }
+
+                  }
+                  //  stage ('Push Image to DockerHub') {
+
+                  //            steps {
+                  //                sh 'docker push stevesam/psta-search_microservice:'
+                                
+                  //            }
+                  //   }
       stage('Docker Push') {
          steps {
             echo "Running in $WORKSPACE"
             dir("$WORKSPACE/azure-vote"){
             script{
-                  docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
+            
                      def image = docker.build('stevesam/jenkins-course')
                      image.push()
-                  }
-            }
+              }
           }
          }
       }
