@@ -3,7 +3,7 @@ pipeline {
 
    environment{
       //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
-        PATH = "$PATH:/usr/local/bin"
+         PATH = "$PATH:/usr/local/bin"
   }
 
    stages {
