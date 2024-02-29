@@ -11,9 +11,9 @@ pipeline {
             echo "$GIT_BRANCH"
          }
       }
-      // stage('Docker Build') {
-      //    steps {
-      //       sh(script: 'docker compose build')
+      stage('Docker Build') {
+         steps {
+            sh(script: 'docker compose build')
             // powershell(script: 'docker images -a')
             // powershell(script: """
             //      cd azure-vote/
@@ -22,8 +22,8 @@ pipeline {
             //      docker images -a
             //      cd ..
             //      """ )
-   //       }
-   //    }
+         }
+      }
    //    stage('Start App') {
    //       steps {
    //          sh(script: 'docker compose up -d')
