@@ -1,9 +1,10 @@
 pipeline {
    agent any
 
-//    environment{
-//         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-//   }
+   environment{
+      //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
+        PATH = "$PATH:/usr/local/bin"
+  }
 
    stages {
       stage('Verify Branch') {
