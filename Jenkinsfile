@@ -11,9 +11,9 @@ pipeline {
             echo "$GIT_BRANCH"
          }
       }
-      stage('Docker Build') {
-         steps {
-            sh(script: 'docker compose build')
+      // stage('Docker Build') {
+      //    steps {
+      //       sh(script: 'docker compose build')
             // powershell(script: 'docker images -a')
             // powershell(script: """
             //      cd azure-vote/
@@ -22,51 +22,51 @@ pipeline {
             //      docker images -a
             //      cd ..
             //      """ )
-         }
-      }
-      stage('Start App') {
-         steps {
-            sh(script: 'docker compose up -d')
-         }
-      }
-      stage('Run Tests') {
-         steps {
-            echo "Running tests)"
-         }
-         post {
-            success {
-               echo "Tests passed! :)"
-            }
-            failure {
-               echo "Tests failed :("
-            }
-         }
-      }
-      stage ('Login to DockerHub') {
+   //       }
+   //    }
+   //    stage('Start App') {
+   //       steps {
+   //          sh(script: 'docker compose up -d')
+   //       }
+   //    }
+   //    stage('Run Tests') {
+   //       steps {
+   //          echo "Running tests)"
+   //       }
+   //       post {
+   //          success {
+   //             echo "Tests passed! :)"
+   //          }
+   //          failure {
+   //             echo "Tests failed :("
+   //          }
+   //       }
+   //    }
+   //    stage ('Login to DockerHub') {
 
-                       steps {
-                           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                       }
+   //                     steps {
+   //                         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+   //                     }
 
-                  }
+   //                }
                 
-      stage('Docker Push') {
-         steps {
-            echo "Running in $WORKSPACE"
-            dir("$WORKSPACE/azure-vote"){
-            script{
+   //    stage('Docker Push') {
+   //       steps {
+   //          echo "Running in $WORKSPACE"
+   //          dir("$WORKSPACE/azure-vote"){
+   //          script{
             
-                     def image = docker.build('stevesam/jenkins-course')
-                     image.push()
-              }
-          }
-         }
-      }
+   //                   def image = docker.build('stevesam/jenkins-course')
+   //                   image.push()
+   //            }
+   //        }
+   //       }
+   //    }
      
-   }
-   post {
-      always {
-         sh(script: 'docker compose down')
-      }
-   }
+   // }
+   // post {
+   //    always {
+   //       sh(script: 'docker compose down')
+   //    }
+   // }
 }
