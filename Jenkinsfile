@@ -6,7 +6,8 @@ pipeline {
    environment{
       //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
          // PATH = "$PATH:/usr/bin/docker"
-                 PATH = "$PATH:/usr/local/bin/docker-compose"
+               //   PATH = "$PATH:/usr/local/bin/docker-compose"
+               PATH = "$PATH:/usr/local/bin"
   }
 
    stages {
