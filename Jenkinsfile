@@ -1,6 +1,7 @@
 pipeline {
-   agent {java}
-
+   agent {
+    label:  docker
+   }
    environment{
       //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
          PATH = "$PATH:/usr/local/bin"
