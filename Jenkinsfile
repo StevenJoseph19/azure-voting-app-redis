@@ -1,9 +1,12 @@
 pipeline {
-   agent any
-   
+   agent {
+    label 'docker' 
+  }
+
    environment{
       //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
-         PATH = "$PATH:/usr/local/bin"
+         // PATH = "$PATH:/usr/bin/docker"
+                 PATH = "$PATH:/usr/local/bin/docker-compose"
   }
 
    stages {
