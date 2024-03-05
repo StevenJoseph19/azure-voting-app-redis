@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent {java}
 
    environment{
       //   DOCKERHUB_CREDENTIALS=credentials('dockerhub'),
